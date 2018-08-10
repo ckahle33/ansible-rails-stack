@@ -1,0 +1,2 @@
+ruby_install_bundler: True
+ruby_version: 2.5.1
