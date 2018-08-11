@@ -1,0 +1,4 @@
+---
+# vars file for nginx
+project_name: "{{ name }}"
+server_name: "{{ project_name }}.org"

@@ -1,0 +1,27 @@
+---
+# provision and configure the stack
+- name: Install python and create a deploy user
+  hosts: all
+  remote_user: root
+  roles:
+    - common
+- name: Install chruby and add wrapper
+  hosts: all
+  remote_user: root
+  roles:
+    - ruby
+- name: Install and configure postgres and redis
+  hosts: all
+  remote_user: root
+  roles:
+    - db
+- name: Install nginx and configure
+  hosts: all
+  remote_user: root
+  roles:
+    - nginx
+- name: Install node and yarn
+  hosts: all
+  remote_user: root
+  roles:
+    - frontend

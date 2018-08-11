@@ -1,0 +1,29 @@
+#!/bin/bash
+
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+
+# calling `chruby_auto` after loading is needed in certain cases
+# https://github.com/postmodern/chruby/issues/258#issuecomment-44897142
+chruby_auto
+
+# Adjustment if the deploy-user differ from `passenger_user`
+#
+# With chruby, gems are either installed in '/opt/rubies/[...]' when running as root,
+# otherwise under '$home/.gem/[...]'. When bundler is run by `deploy-user` (could be a different name)
+# we need to update the paths so the runner of this wrapper can find them.
+#
+# This is *not* needed if the user installing the gems is the same as `passenger_user`.
+# Must adjust $GEM_HOME, $GEM_PATH and $PATH (for ./bin in gems). $GEM_ROOT can be left unchanged.
+#
+# UNCOMMENT IF NEEDED
+# deploy_user_home=$(echo ~deploy-user)
+
+# override values set by chruby
+# https://github.com/postmodern/chruby/blob/a44c03/share/chruby/chruby.sh#L57
+export GEM_HOME="$deploy_user_home/.gem/$RUBY_ENGINE/$RUBY_VERSION"
+export GEM_PATH="$GEM_HOME:$GEM_PATH"
+export PATH="$GEM_HOME/bin:$PATH"
+
+# original call
+exec "ruby" "$@"

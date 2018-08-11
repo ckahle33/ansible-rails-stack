@@ -1,0 +1,7 @@
+if [ -n "$BASH_VERSION" ] || [ -n "$ZSH_VERSION" ]; then
+  source /usr/local/share/chruby/chruby.sh
+
+  # auto-switching is used for login shells, but not by
+  # passenger or cron jobs. See `chruby-wrapper` for details.
+  source /usr/local/share/chruby/auto.sh
+fi

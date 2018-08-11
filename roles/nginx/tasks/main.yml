@@ -1,0 +1,14 @@
+---
+# tasks file for nginx
+
+- name: configure nginx
+  become: true
+  template:
+    src: templates/nginx.conf.j2
+    dest: "/etc/nginx/nginx.conf"
+
+- name: add specific server configuration
+  become: true
+  template:
+    src: templates/server.conf.j2
+    dest: "/etc/nginx/sites-enabled/{{ project_name }}.conf"
