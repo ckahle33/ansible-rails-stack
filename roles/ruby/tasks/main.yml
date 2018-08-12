@@ -7,11 +7,20 @@
     src: templates/chruby-wrapper.j2
     dest: /usr/local/bin/chruby-wrapper
 
+- name: make chruby-wrapper execeutable
+  file: dest=/usr/local/bin/chruby-wrapper mode=+x
+
 - name: create chruby.sh
   become: yes
   template:
     src: templates/chruby.ch.j2
     dest: /etc/profile.d/chruby.sh
 
-- name: install ruby 2.5.1
-  raw: ruby-install ruby 2.5.1
+- name: Set default_ruby
+  lineinfile:
+    create: yes
+    dest: ~/.bash_profile
+    line: "chruby ruby-2.5.1"
+
+# - name: install ruby 2.5.1
+#   raw: ruby-install ruby 2.5.1
