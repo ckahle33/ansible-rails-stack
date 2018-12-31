@@ -9,5 +9,3 @@
   tags:
     - packages
 
-- name: Create postgresql user
-  postgresql_user: name={{ ansible_ssh_user }} priv=ALL

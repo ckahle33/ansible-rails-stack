@@ -1,2 +1,13 @@
 ---
 # defaults file for postgres
+postgresql_databases:
+  - name: "{{ name }}"
+
+postgresql_users:
+  - name: "{{ name }}"
+  - pass: "{{ dbpass }}"
+
+postgresql_user_privileges:
+  - name: "{{ name }}"
+    db: "{{ name }}"
+    priv: "ALL"

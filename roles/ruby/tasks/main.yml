@@ -20,7 +20,7 @@
   lineinfile:
     create: yes
     dest: ~/.bash_profile
-    line: "chruby ruby-2.5.1"
+    line: "chruby ruby-2.6.0"
 
 # - name: install ruby 2.5.1
 #   raw: ruby-install ruby 2.5.1
